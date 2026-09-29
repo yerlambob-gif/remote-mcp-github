@@ -1,52 +1,14 @@
-/**
- * For more details on how to configure Wrangler, refer to:
- * https://developers.cloudflare.com/workers/wrangler/configuration/
- */
 {
-	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "remote-mcp-github",
-	"account_id": "e1b70bd196c19cb376259b0c98ae7736",
+	"name": "github-mcp",
+	"account_id": "4535bf944916be2ba8f3079895bb5572",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-03-10",
 	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
 	"workers_dev": true,
 	"preview_urls": false,
-	"upload_source_maps": true,
-	"observability": {
-		"enabled": true,
-	},
-	"dev": {
-		"port": 8788,
-	},
-	/**
-	 * Required secrets (see README for setup):
-	 *   GITHUB_CLIENT_ID
-	 *   GITHUB_CLIENT_SECRET
-	 *   COOKIE_ENCRYPTION_KEY
-	 * Validated at deploy time and mapped into Worker bindings from process
-	 * env / .dev.vars in local dev.
-	 */
-	"secrets": {
-		"required": ["GITHUB_CLIENT_ID", "GITHUB_CLIENT_SECRET", "COOKIE_ENCRYPTION_KEY"],
-	},
-	"migrations": [
-		{
-			"new_sqlite_classes": ["MyMCP"],
-			"tag": "v1",
-		},
-	],
-	"durable_objects": {
-		"bindings": [
-			{
-				"class_name": "MyMCP",
-				"name": "MCP_OBJECT",
-			},
-		],
-	},
-	"kv_namespaces": [
-		{
-			"binding": "OAUTH_KV",
-			"id": "2af89bb4f35b428ab92d314d1423b69c",
-		},
-	],
+	"upload_source_maps": false,
+	"observability": { "enabled": true },
+	"migrations": [{ "new_sqlite_classes": ["MyMCP"], "tag": "v1" }],
+	"durable_objects": { "bindings": [{ "class_name": "MyMCP", "name": "MCP_OBJECT" }] },
+	"kv_namespaces": [{ "binding": "OAUTH_KV", "id": "b9ad145014934014ad0d8167b8fe89f2" }]
 }
